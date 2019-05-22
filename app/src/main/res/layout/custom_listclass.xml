@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:weightSum="10"
+    android:padding="5dp"
+    android:layout_gravity="left"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/txtId"
+        android:gravity="left"
+        android:layout_weight="1"
+        android:textSize="20sp"
+        android:text="STT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/txtMalop"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="4"
+        android:textSize="20sp"
+        android:text="Mã Lớp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/txtTenlop"
+        android:layout_weight="4"
+        android:textSize="20sp"
+        android:layout_marginLeft="10dp"
+        android:text="Tên Lớp"
+        android:gravity="left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/imgedit"
+        android:src="@drawable/edit"
+        android:layout_weight="0.5"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
+    <ImageView
+        android:id="@+id/imgdelete"
+        android:src="@drawable/delete2"
+        android:layout_weight="0.5"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
+</LinearLayout>
