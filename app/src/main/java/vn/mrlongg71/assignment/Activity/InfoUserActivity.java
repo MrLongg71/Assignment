@@ -119,9 +119,9 @@ public class InfoUserActivity extends AppCompatActivity {
 
 //        //settext cho dialog
         edtUserUpdate.setText(user);
-        edtNameUpdate.setText("");
-        edtPlaceUpdate.setText("");
-        edtPhoneUpdate.setText("");
+        edtNameUpdate.setText(name);
+        edtPlaceUpdate.setText(place);
+        edtPhoneUpdate.setText(phone);
         //btn dismiss
         btnHuy.setOnClickListener(new View.OnClickListener() {
             @Override

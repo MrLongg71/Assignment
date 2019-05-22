@@ -55,7 +55,7 @@ public class Database extends SQLiteOpenHelper {
         statement.bindString(1, tenSV);
         statement.bindString(2,date);
         statement.bindString(3, idclass + "");
-        statement.bindString(3, iduser + "");
+        statement.bindString(4, iduser + "");
         statement.executeInsert();
     }
     //Truy vấn database

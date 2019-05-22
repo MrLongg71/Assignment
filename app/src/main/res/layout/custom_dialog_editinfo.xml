@@ -27,22 +27,21 @@
         android:id="@+id/edtNameEdit"
         android:drawableLeft="@drawable/name"
         android:padding="10dp"
-        android:hint="Nhập User"
+        android:hint="Nhập tên"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
         android:id="@+id/edtPlaceEdit"
         android:drawableLeft="@drawable/marker"
         android:padding="10dp"
-        android:hint="Nhập User"
+        android:hint="Nhập địa điểm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
         android:id="@+id/edtPhoneEdit"
         android:drawableLeft="@drawable/phone"
         android:padding="10dp"
-
-        android:hint="Nhập User"
+        android:hint="Nhập Số điện thoại"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <LinearLayout

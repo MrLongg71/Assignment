@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,6 +32,7 @@ import vn.mrlongg71.assignment.R;
 public class ManageSVActivity extends AppCompatActivity {
     EditText edtTenSV, edtDate;
     Button btnAddSV;
+    Toolbar toolbar;
     int iduser,idclass;
     Spinner spinner;
     ArrayList<AddClass> addClassArrayListSpiner;
@@ -44,6 +46,7 @@ public class ManageSVActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_sv);
         anhxa();
+        Toolbar();
         //xử lí chọn ngày tháng năm sinh
         edtDate();
         //xử lí đổ dữ liệu lên spiner
@@ -51,7 +54,7 @@ public class ManageSVActivity extends AppCompatActivity {
         //xử lí btnAddSV
         btnAddSV();
         GetDataClass_SV();
-        Log.d("userid123" , String.valueOf(iduser));
+
     }
     //xử lí btnAddSV
     private void btnAddSV() {
@@ -59,9 +62,19 @@ public class ManageSVActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Log.d("calsss", String.valueOf(idclass));
-                insertDataSV();
-                GetDataClass_SV();
+                //idclass = 0 -> "Chọn lớp" -> null
+              if(idclass == 0){
+                  Toast.makeText(ManageSVActivity.this, "Vui lòng chọn một lớp!", Toast.LENGTH_SHORT).show();
+              }else if(edtTenSV.length() == 0){
+                  Toast.makeText(ManageSVActivity.this, "Vui lòng nhập Tên", Toast.LENGTH_SHORT).show();
+              }else if(edtDate.length() == 0){
+                  Toast.makeText(ManageSVActivity.this, "Vui lòng nhập Ngày sinh", Toast.LENGTH_SHORT).show();
+              }
+              else{
+                  insertDataSV();
+                  GetDataClass_SV();
+              }
+
 
             }
         });
@@ -104,7 +117,6 @@ public class ManageSVActivity extends AppCompatActivity {
     //dialog date
     private void DialogDate(){
         final Calendar calendar = Calendar.getInstance();
-
         int day = calendar.get(Calendar.DATE);
         int month = calendar.get(Calendar.MONTH);
         int year = calendar.get(Calendar.YEAR);
@@ -116,16 +128,15 @@ public class ManageSVActivity extends AppCompatActivity {
                 calendar.set(i, i1,i2);
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 edtDate.setText(simpleDateFormat.format(calendar.getTime()));
-
             }
         }, year,month,day);
         datePickerDialog.show();
     }
     private void anhxa() {
+    toolbar = findViewById(R.id.toolbar_Manage);
     edtTenSV = findViewById(R.id.edtTenSV);
     edtDate = findViewById(R.id.edtDate);
     spinner = findViewById(R.id.spinnerClass);
-
     btnAddSV = findViewById(R.id.btnAddSV);
     //nhận iduser từ home
         Intent intent = getIntent();
@@ -151,20 +162,30 @@ public class ManageSVActivity extends AppCompatActivity {
         String tenSV = edtTenSV.getText().toString().trim();
         String date  = edtDate.getText().toString().trim();
         MainActivity.database.INSERT_SV(tenSV,date,idclass,iduser);
-        Toast.makeText(this, "Đã thêm thành công!", Toast.LENGTH_SHORT).show();
-    }
+        Toast.makeText(this, "Đã thêm thành công Sinh viên " + tenSV, Toast.LENGTH_SHORT).show();
+        }
     private void GetDataClass_SV(){
-            Cursor dataSV = MainActivity.database.GetData("SELECT * FROM Students WHERE iduser = -1");
+            Cursor dataSV = MainActivity.database.GetData("SELECT * FROM Students WHERE iduser = '"+ iduser+"'");
+            addClassArrayListSV.clear();
             while (dataSV.moveToNext()){
                 int id = dataSV.getInt(0);
                 String tenSV = dataSV.getString(1);
-                Log.d("tensv" , tenSV);
-
                 String date = dataSV.getString(2);
-
                 addClassArrayListSV.add(new Students(id,tenSV,date,idclass,iduser));
             }
             studentsAdapter.notifyDataSetChanged();
+    }
+    private void Toolbar(){
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.back);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+
     }
 }
 

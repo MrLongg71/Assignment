@@ -51,8 +51,7 @@ public class MainActivity extends AppCompatActivity {
         Cursor dataUser = database.GetData("SELECT * FROM Students");
         while (dataUser.moveToNext()){
             String user = dataUser.getString(1);
-            Toast.makeText(this, "" + user, Toast.LENGTH_SHORT).show();
-        }
+            }
 
 
     }

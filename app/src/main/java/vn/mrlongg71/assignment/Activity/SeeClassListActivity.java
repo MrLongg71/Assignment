@@ -7,8 +7,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -29,16 +32,59 @@ public class SeeClassListActivity extends AppCompatActivity {
     ImageView  img_huy_updateClass;
     EditText edtMalopUdate, edtTenlopupdate;
     Button btnUpdateClass,btndeleteUpdate;
+    Toolbar toolbar;
     int iduser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_see_class_list);
+        
         anhxa();
+        Toolbar();
         GetDataClass();
+        //click item listview
+        clickListview();
 
 
     }
+    //click item listview chọn edit hay xóa
+    private void clickListview() {
+        listaddclass.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+               final Dialog dialog = new Dialog(SeeClassListActivity.this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.custom_dialog_choose_delete_edit);
+                ImageView imgChooseEdit, imgChooseDelete;
+                imgChooseEdit = dialog.findViewById(R.id.imgChooseEdit);
+                imgChooseDelete = dialog.findViewById(R.id.imgChooseDelete);
+                final AddClass addClass = addClassArrayList.get(position);
+                imgChooseEdit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        DialogUpdateClass(addClass.getId(), addClass.getMalop(),addClass.getTenlop());
+                        dialog.dismiss();
+                    }
+                });
+                imgChooseDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        DialogDeleteClass(addClass.getId(), addClass.getMalop());
+                        dialog.dismiss();
+                    }
+                });
+
+
+                dialog.show();
+
+
+                }
+        });
+
+
+
+    }
+
     public void DialogUpdateClass(final int id, String malop , final String tenlop){
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -119,6 +165,8 @@ public class SeeClassListActivity extends AppCompatActivity {
     }
 
     private void anhxa() {
+
+        toolbar = findViewById(R.id.toolbar_SeeClass);
         listaddclass = findViewById(R.id.listClass);
         //xử lí listview
         addClassArrayList = new ArrayList<>();
@@ -129,4 +177,17 @@ public class SeeClassListActivity extends AppCompatActivity {
         iduser = intent.getIntExtra("iduser" , -1);
 
     }
+    private void Toolbar(){
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.back);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+
+    }
+
 }

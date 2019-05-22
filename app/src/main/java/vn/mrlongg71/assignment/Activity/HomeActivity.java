@@ -41,7 +41,6 @@ public class HomeActivity extends AppCompatActivity
         anhxa();
         setSupportActionBar(toolbar);
         //xử lí navgation
-
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -69,9 +68,6 @@ public class HomeActivity extends AppCompatActivity
             }
         });
     }
-
-    // Hạn chế đặt tên package bắt đầu bằng chữ hoa, chỉ có tên clas
-    // mới bắt đầu bằng chữ hoa thôi.
 
     private void btnSeeClass() {
         btnSeeClass.setOnClickListener(new View.OnClickListener() {

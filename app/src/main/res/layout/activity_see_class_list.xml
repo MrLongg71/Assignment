@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".Activity.SeeClassListActivity">
-
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Apptoolbar_SeeClass"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_SeeClass"
+            android:background="#2196F3"
+            app:title="Danh sách Lớp học"
+            app:navigationIcon="@drawable/back"
+            app:titleTextColor="#FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize">
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:background="#03A9F4"
@@ -14,10 +28,10 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:gravity="left"
             android:layout_weight="0.5"
             android:textSize="30sp"
             android:text="STT"
+            android:padding="5dp"
             android:textColor="#FFFFFF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

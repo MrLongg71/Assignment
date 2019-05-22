@@ -41,11 +41,8 @@ public class ClassAdapter extends BaseAdapter {
     }
     private class ViewHolder{
         TextView txtId, txtMalop, txtTenlop;
-        ImageView imgEdit, imgDelete;
 
     }
-
-
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder holder;
@@ -56,8 +53,6 @@ public class ClassAdapter extends BaseAdapter {
             holder.txtId = view.findViewById(R.id.txtId);
             holder.txtMalop = view.findViewById(R.id.txtMalop);
             holder.txtTenlop = view.findViewById(R.id.txtTenlop);
-            holder.imgEdit = view.findViewById(R.id.imgedit);
-            holder.imgDelete = view.findViewById(R.id.imgdelete);
             view.setTag(holder);
 
 
@@ -69,20 +64,7 @@ public class ClassAdapter extends BaseAdapter {
         holder.txtId.setText(i + 1 +"");
         holder.txtMalop.setText(addClass.getMalop());
         holder.txtTenlop.setText(addClass.getTenlop());
-        //btn update class
-        holder.imgEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                context.DialogUpdateClass(addClass.getId(), addClass.getMalop() , addClass.getTenlop());
-            }
-        });
-        //btn delete class
-        holder.imgDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                context.DialogDeleteClass(addClass.getId(), addClass.getTenlop());
-            }
-        });
+
         return view;
     }
 }
