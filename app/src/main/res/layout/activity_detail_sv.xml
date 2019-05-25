@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".Activity.DetailSVActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Apptoolbar_Detail"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_Detail"
+            android:background="#2196F3"
+            app:title="Chi tiết Sinh viên"
+            app:navigationIcon="@drawable/back"
+            app:titleTextColor="#FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize">
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+    <Button
+        android:id="@+id/btnUpdateDetailSV"
+        android:text="Sửa Thông tin"
+        android:background="@drawable/custom_edittext"
+        android:layout_margin="10dp"
+        android:layout_below="@id/layoutSV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:text="Xóa Sinh viên"
+        android:background="@drawable/custom_edittext"
+        android:layout_margin="10dp"
+        android:layout_below="@id/btnUpdateDetailSV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:background="@drawable/custom_edittext"
+        android:weightSum="2"
+        android:layout_margin="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <!--<LinearLayout-->
+        <!--android:orientation="vertical"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--<TextView-->
+            <!--android:textColor="#1A1919"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:textSize="20sp"-->
+            <!--android:layout_marginBottom="50dp"-->
+            <!--android:text="Ảnh Sinh viên: "-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
+        <!--<TextView-->
+            <!--android:textColor="#1A1919"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:textSize="20sp"-->
+            <!--android:text="Tên Sinh viên: "-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
+        <!--<TextView-->
+            <!--android:textColor="#1A1919"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:textSize="20sp"-->
+            <!--android:text="Mã lớp: "-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
+        <!--<TextView-->
+            <!--android:textColor="#1A1919"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:textSize="20sp"-->
+            <!--android:text="Tên Lớp: "-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
+        <!--<TextView-->
+            <!--android:textColor="#1A1919"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:textSize="20sp"-->
+            <!--android:text="SĐT: "-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
+        <!--<TextView-->
+            <!--android:textColor="#1A1919"-->
+            <!--android:textSize="20sp"-->
+            <!--android:text="Email: "-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
+        <!--<TextView-->
+            <!--android:textColor="#1A1919"-->
+            <!--android:textSize="20sp"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:text="Địa chỉ: "-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
+    <!--</LinearLayout>-->
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ListView
+            android:id="@+id/list_DetailSV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </ListView>
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+</LinearLayout>

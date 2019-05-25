@@ -43,5 +43,16 @@
         android:layout_width="match_parent"
         android:text="Quản lý sinh viên"
         android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btnSeeListSV"
+        android:textColor="#FFFFFF"
+        android:textAlignment="center"
+        android:layout_margin="5dp"
+        android:padding="10dp"
+        android:drawableLeft="@drawable/eys"
+        android:background="#009688"
+        android:layout_width="match_parent"
+        android:text="Xem danh sách Sinh viên"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

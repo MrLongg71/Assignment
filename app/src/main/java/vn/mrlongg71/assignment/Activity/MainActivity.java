@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         database.QueryData("CREATE TABLE IF NOT EXISTS User(id INTEGER PRIMARY KEY AUTOINCREMENT, user VARCHAR(20), password VARCHAR(20), name VARCHAR(30), place VARCHAR(40), phone VARCHAR(10))");
         //create table Class
         database.QueryData("CREATE TABLE IF NOT EXISTS Class(id INTEGER PRIMARY KEY , malop VARCHAR(20), tenlop VARCHAR(20), iduser INTEGER(20))");
-        database.QueryData("CREATE TABLE IF NOT EXISTS Students(id INTEGER PRIMARY KEY , tensv VARCHAR(20), ngaysinh VARCHAR(20), idclass INTEGER(20),iduser INTEGER(20))");
+        database.QueryData("CREATE TABLE IF NOT EXISTS Students(id INTEGER PRIMARY KEY , tensv VARCHAR(20), ngaysinh VARCHAR(20), idclass INTEGER(20),iduser INTEGER(20), tenlop VARCHAR(20), sdt VARCHAR(20),email VARCHAR(20),place VARCHAR(20), images BLOB)");
         //database.QueryData("INSERT INTO Students VALUES(null,'A','01' , 1, 1)");
 
         //duyệt get database

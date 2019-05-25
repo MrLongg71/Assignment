@@ -30,7 +30,7 @@ public class HomeActivity extends AppCompatActivity
     TextView txtUser;
     NavigationView navigationView;
     private int iduser;
-    Button btnAddclass, btnSeeClass, btnManageClass , btnAddclass_dialog, btnDelete_Dialog;
+    Button btnAddclass, btnSeeClass, btnManageClass , btnAddclass_dialog, btnDelete_Dialog, btnSeeListSV;
     EditText edtMaLop, edtTenLop;
     ImageView imgHuy_Dialog_add;
     @Override
@@ -56,6 +56,22 @@ public class HomeActivity extends AppCompatActivity
         btnSeeClass();
         //xử lí btnManageSV
         btnManageSV();
+        //xử lí btn SeeListSV
+        btnSeeListSV();
+    }
+
+    private void btnSeeListSV() {
+
+
+        btnSeeListSV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, SeeStudentsListActivity.class);
+                intent.putExtra("iduser" , iduser);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void btnManageSV() {
@@ -136,6 +152,7 @@ public class HomeActivity extends AppCompatActivity
         btnAddclass = findViewById(R.id.btnaddClass);
         btnSeeClass = findViewById(R.id.btnseeClass);
         btnManageClass = findViewById(R.id.btnmanageClass);
+        btnSeeListSV = findViewById(R.id.btnSeeListSV);
        // txtUser.setText("ssss");
 
     }

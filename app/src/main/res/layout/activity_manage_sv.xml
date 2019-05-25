@@ -42,7 +42,7 @@
             <TextView
                 android:layout_weight="1"
                 android:text="Lớp"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <Spinner
@@ -62,10 +62,9 @@
             android:orientation="horizontal">
 
             <TextView
-
                 android:layout_weight="1"
                 android:text="Tên Sinh viên"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:layout_marginRight="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -73,7 +72,7 @@
                 android:id="@+id/edtTenSV"
                 android:layout_weight="1"
                 android:background="@drawable/custom_edittext"
-                android:hint="Nhập tên Sinh viên"
+                android:hint="Nhập tên"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -92,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:text="Ngày sinh "
-                android:textSize="25sp" />
+                android:textSize="20sp" />
             <EditText
                 android:id="@+id/edtDate"
                 android:layout_width="match_parent"
@@ -105,6 +104,15 @@
                 android:inputType="date" />
         </LinearLayout>
         <Button
+            android:id="@+id/btnAddAnhSVManage"
+            android:background="@drawable/custom_button"
+            android:text="Chọn ảnh"
+            android:layout_margin="10dp"
+            android:textColor="#FFFFFF"
+            android:layout_below="@+id/layoutDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
             android:id="@+id/btnAddSV"
             android:background="@drawable/custom_button"
             android:text="Thêm Sinh viên"
@@ -115,13 +123,31 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
+    <TextView
+        android:gravity="center"
+        android:textStyle="italic"
+        android:textColor="#f00"
+        android:textSize="20sp"
+        android:text="Danh sách Sinh viên gần đây"
+        android:id="@+id/txtview"
+        android:layout_below="@id/layoutBaoAll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <ListView
         android:layout_margin="5dp"
         android:id="@+id/list_SV"
-        android:layout_below="@+id/layoutBaoAll"
+        android:layout_below="@+id/txtview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
     </ListView>
+
+    <ImageView
+
+        android:id="@+id/imgAnhSVTam"
+        android:layout_below="@+id/list_SV"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
 
 </RelativeLayout>

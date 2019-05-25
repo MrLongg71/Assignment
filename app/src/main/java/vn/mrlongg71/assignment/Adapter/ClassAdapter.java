@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,7 +19,7 @@ import vn.mrlongg71.assignment.Activity.SeeClassListActivity;
 public class ClassAdapter extends BaseAdapter {
     private SeeClassListActivity context;
     private  int layout;
-    private List<AddClass> addClassList;
+    public static List<AddClass> addClassList;
 
     public ClassAdapter(SeeClassListActivity context, int layout, List<AddClass> addClassList) {
         this.context = context;
@@ -65,6 +67,8 @@ public class ClassAdapter extends BaseAdapter {
         holder.txtMalop.setText(addClass.getMalop());
         holder.txtTenlop.setText(addClass.getTenlop());
 
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.scale_listview);
+        view.startAnimation(animation);
         return view;
     }
 }

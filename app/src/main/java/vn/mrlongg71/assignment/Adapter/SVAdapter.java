@@ -7,21 +7,22 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.lang.annotation.Annotation;
 import java.util.List;
 
+import vn.mrlongg71.assignment.Model.AddClass;
 import vn.mrlongg71.assignment.Model.Students;
 import vn.mrlongg71.assignment.R;
 
-public class StudentsAdapter extends BaseAdapter {
-
+public class SVAdapter extends BaseAdapter {
     Context context;
     int layout;
     List<Students> studentsList;
 
-    public StudentsAdapter(Context context, int layout, List<Students> studentsList) {
+    public SVAdapter(Context context, int layout, List<Students> studentsList) {
         this.context = context;
         this.layout = layout;
         this.studentsList = studentsList;
@@ -41,32 +42,37 @@ public class StudentsAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return 0;
     }
-    private class ViewHodler{
-        TextView txtSTT, txtTenSV, txtDate;
+    public class ViewHolder{
+
+        ImageView imgAnhSV;
+        TextView txtTenSv, txtLop;
 
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHodler viewHodler;
+        ViewHolder viewHolder;
         if(convertView == null){
-            viewHodler = new ViewHodler();
+            viewHolder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(layout, null);
-            viewHodler.txtSTT = convertView.findViewById(R.id.txtSTT);
-            viewHodler.txtTenSV = convertView.findViewById(R.id.txtTenSV);
-            viewHodler.txtDate = convertView.findViewById(R.id.txtDate);
-            convertView.setTag(viewHodler);
-
-        }else{
-            viewHodler = (ViewHodler) convertView.getTag();
+            viewHolder.imgAnhSV = convertView.findViewById(R.id.imgAnhSV);
+            viewHolder.txtTenSv = convertView.findViewById(R.id.txtTensv_SeeSV);
+            viewHolder.txtLop = convertView.findViewById(R.id.txtLopsv_SeeSV);
+            convertView.setTag(viewHolder);
+        }else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
+
         Students students = studentsList.get(position);
-        viewHodler.txtSTT.setText("" +(position+1));
-        viewHodler.txtTenSV.setText(students.getTenSV());
-        viewHodler.txtDate.setText(students.getDate());
+        viewHolder.txtTenSv.setText(students.getTenSV());
+        viewHolder.txtLop.setText(students.getDate());
+
+        //gán animotion
         Animation animation = AnimationUtils.loadAnimation(context,R.anim.scale_listview);
         convertView.startAnimation(animation);
+
+
         return convertView;
     }
 }

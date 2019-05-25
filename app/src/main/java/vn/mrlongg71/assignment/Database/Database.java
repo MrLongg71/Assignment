@@ -47,15 +47,21 @@ public class Database extends SQLiteOpenHelper {
         statement.executeInsert();
     }
     //insert SV
-    public void INSERT_SV(String tenSV,String date,int idclass ,int iduser){
+    public void INSERT_SV(String tenSV,String date,int idclass ,int iduser, String tenlop, String sdt, String email,String place, byte[] images ){
         SQLiteDatabase database = getWritableDatabase();
-        String sql = "INSERT INTO Students VALUES(null, ?, ? ,?,?)";
+        String sql = "INSERT INTO Students VALUES(null, ?, ? ,?,?,?,?,?,?,?)";
         SQLiteStatement statement = database.compileStatement(sql);
         statement.clearBindings();
         statement.bindString(1, tenSV);
         statement.bindString(2,date);
         statement.bindString(3, idclass + "");
         statement.bindString(4, iduser + "");
+        statement.bindString(5, tenlop);
+        statement.bindString(6, sdt);
+        statement.bindString(7, email);
+        statement.bindString(8, place);
+        statement.bindBlob(9, images);
+
         statement.executeInsert();
     }
     //Truy vấn database
