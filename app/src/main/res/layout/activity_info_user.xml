@@ -18,7 +18,7 @@
         android:id="@+id/toolbar_infoUser"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="@color/group_orgin"
         app:title="Thông tin tài khoản
 "
         app:popupTheme="@style/AppTheme.PopupOverlay" />

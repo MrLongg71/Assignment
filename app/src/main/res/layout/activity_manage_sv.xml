@@ -13,7 +13,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_Manage"
-        android:background="#2196F3"
+        android:background="@color/group_orgin"
         app:title="Quản lý Sinh viên"
         app:navigationIcon="@drawable/back"
         app:titleTextColor="#FFFFFF"
@@ -139,13 +139,14 @@
         android:id="@+id/list_SV"
         android:layout_below="@+id/txtview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
     </ListView>
 
     <ImageView
 
         android:id="@+id/imgAnhSVTam"
+        android:visibility="gone"
         android:layout_below="@+id/list_SV"
         android:layout_width="50dp"
         android:layout_height="50dp" />

@@ -60,12 +60,12 @@ public class DetailSVAdapter extends BaseAdapter {
 
 
         Students students = detailSvList.get(position);
-        txtTenSvDetail.setText("Tên SV: " + students.getTenSV());
-        txtNgaySinhSVDetail.setText("Ngày sinh: " + students.getDate());
-        txtEmailDetailSV.setText("Email: " + students.getEmail());
-        txtTenLopDetail.setText("Tên Lớp: " + students.getTenlop());
-        txtSDTDetailSV.setText("SĐT: " + students.getSdt());
-        txtPlaceDetailSV.setText("Địa chỉ: " + students.getPlace());
+        txtTenSvDetail.setText( students.getTenSV());
+        txtNgaySinhSVDetail.setText(  students.getDate());
+        txtEmailDetailSV.setText( students.getEmail());
+        txtTenLopDetail.setText(students.getTenlop());
+        txtSDTDetailSV.setText( students.getSdt());
+        txtPlaceDetailSV.setText( students.getPlace());
 
         //chuyển byte -. bitmap
         byte[] imgSV = students.getImages();

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#5fb0c9"
+    android:background="#B4FF3D00"
     android:orientation="vertical"
     android:scrollbarAlwaysDrawVerticalTrack="true">
 
@@ -96,9 +96,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:background="@drawable/custom_button2"
+                android:background="@drawable/custom_button"
                 android:text="Sign Up"
-                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
                 android:textSize="18sp" />
 
         </LinearLayout>

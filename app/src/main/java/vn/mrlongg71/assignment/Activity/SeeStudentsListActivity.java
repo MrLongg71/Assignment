@@ -71,6 +71,7 @@ public class SeeStudentsListActivity extends AppCompatActivity {
         arr_listSpiner.add(new AddClass(0, "null" , "Chọn lớp", iduser));
         spinnerAdapter = new SpinerClassAdapter(this, R.layout.custom_list_spiner_class, arr_listSpiner);
         spinnerClass.setAdapter(spinnerAdapter);
+
         //click spinner
         spinnerClass.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

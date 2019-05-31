@@ -90,7 +90,7 @@
             android:layout_weight="1"
             android:textColor="#FFFFFF"
             android:padding="7dp"
-            android:background="#03A9F4"
+            android:background="@color/group_orgin"
             android:text="Thêm Lớp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -102,7 +102,7 @@
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:padding="7dp"
-            android:background="#03A9F4"
+            android:background="@color/group_orgin"
             android:drawableLeft="@drawable/delete"
             android:text="Xóa Trắng "
             android:textColor="#FFFFFF" />

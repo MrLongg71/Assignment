@@ -139,6 +139,7 @@ public class SeeClassListActivity extends AppCompatActivity {
                 MainActivity.database.QueryData("DELETE FROM Class WHERE id = '"+id+"'");
                 Toast.makeText(getApplicationContext(), "Đã xóa lớp "+ tenlop + " thành công!", Toast.LENGTH_SHORT).show();
                 GetDataClass();
+                finish();
             }
         });
         aBuilder.setNegativeButton("Không", new DialogInterface.OnClickListener() {

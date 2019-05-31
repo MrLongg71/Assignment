@@ -21,6 +21,7 @@ public class SVAdapter extends BaseAdapter {
     Context context;
     int layout;
     List<Students> studentsList;
+   public static Students students;
 
     public SVAdapter(Context context, int layout, List<Students> studentsList) {
         this.context = context;
@@ -64,7 +65,7 @@ public class SVAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        Students students = studentsList.get(position);
+         students = studentsList.get(position);
         viewHolder.txtTenSv.setText(students.getTenSV());
         viewHolder.txtLop.setText(students.getDate());
 

@@ -9,7 +9,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar_SeeSV"
-            android:background="#2196F3"
+            android:background="@color/group_orgin"
             app:title="Danh sách Sinh viên"
             app:navigationIcon="@drawable/back"
             app:titleTextColor="#FFFFFF"
