@@ -190,7 +190,7 @@ public class SeeStudentsListActivity extends AppCompatActivity {
               public boolean onQueryTextChange(String s) {
                   Log.d("AAA", s );
 
-                  GetDataSVSearch();
+
                   svAdapter.search(s);
                   svAdapter.notifyDataSetChanged();
 
