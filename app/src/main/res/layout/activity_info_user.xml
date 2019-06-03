@@ -19,25 +19,22 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/group_orgin"
-        app:title="Thông tin tài khoản
-"
-        app:popupTheme="@style/AppTheme.PopupOverlay" />
+        app:title="Thông tin tài khoản"
+         />
 
   </android.support.design.widget.AppBarLayout>
-  <!--<android.support.v7.widget.Toolbar-->
-  <!--android:id="@+id/toolbar_infoUser"-->
-  <!--android:layout_width="match_parent"-->
-  <!--android:layout_height="?attr/actionBarSize"-->
-  <!--app:title="Thông Tin Tài Khoản"-->
-  <!--app:titleTextColor="#FFFFFF"-->
-  <!--android:background="#00BCD4"-->
-  <!--app:popupTheme="@style/AppTheme.PopupOverlay">-->
-  <!--</android.support.v7.widget.Toolbar>-->
+
+  <ScrollView
+      android:layout_below="@id/appbar"
+      android:id="@+id/scrollview"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
 
   <RelativeLayout
+
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
-      android:layout_below="@+id/appbar"
       android:layout_marginLeft="30dp"
       android:layout_marginRight="30dp"
 
@@ -62,7 +59,7 @@
           android:layout_height="wrap_content"
           android:layout_marginLeft="20dp"
           android:layout_marginRight="20dp"
-          android:background="#d67601"
+          android:background="@drawable/custom_button"
           android:text="Sửa Thông tin"
           android:textAllCaps="false"
           android:textColor="#fff"
@@ -75,7 +72,7 @@
           android:layout_marginLeft="20dp"
           android:layout_marginRight="20dp"
           android:layout_marginTop="20dp"
-          android:background="#d67601"
+          android:background="@drawable/custom_button"
           android:text="Xóa Tài khoản"
           android:textAllCaps="false"
           android:textColor="#fff"
@@ -86,16 +83,5 @@
   </RelativeLayout>
 
 
-
-  <!--<ImageButton-->
-      <!--android:id="@+id/user_profile_photo"-->
-      <!--android:layout_width="100dp"-->
-      <!--android:layout_height="100dp"-->
-      <!--android:layout_below="@+id/appbar"-->
-      <!--android:layout_centerHorizontal="true"-->
-      <!--android:layout_marginTop="16dp"-->
-      <!--android:background="#75ADA5A5"-->
-      <!--android:elevation="4dp"-->
-      <!--android:src="@drawable/user" />-->
-
+  </ScrollView>
 </RelativeLayout>

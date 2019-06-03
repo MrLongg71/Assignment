@@ -16,7 +16,7 @@
         android:layout_margin="5dp"
         android:textAlignment="center"
         android:drawableLeft="@drawable/add"
-        android:background="@color/group_orgin"
+        android:background="@drawable/custom_button"
         android:layout_width="match_parent"
         android:text="Thêm Lớp"
         android:padding="10dp"
@@ -28,7 +28,7 @@
         android:padding="10dp"
         android:textAlignment="center"
         android:drawableLeft="@drawable/eys"
-        android:background="@color/group_orgin"
+        android:background="@drawable/custom_button"
         android:layout_width="match_parent"
         android:text="Xem Danh sách Lớp"
         android:layout_height="wrap_content" />
@@ -39,7 +39,7 @@
         android:layout_margin="5dp"
         android:padding="10dp"
         android:drawableLeft="@drawable/manage"
-        android:background="@color/group_orgin"
+        android:background="@drawable/custom_button"
         android:layout_width="match_parent"
         android:text="Quản lý sinh viên"
         android:layout_height="wrap_content" />
@@ -50,7 +50,7 @@
         android:layout_margin="5dp"
         android:padding="10dp"
         android:drawableLeft="@drawable/eys"
-        android:background="@color/group_orgin"
+        android:background="@drawable/custom_button"
         android:layout_width="match_parent"
         android:text="Xem danh sách Sinh viên"
         android:layout_height="wrap_content" />

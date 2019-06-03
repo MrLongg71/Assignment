@@ -23,29 +23,18 @@
             android:layout_height="?actionBarSize">
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
 
-    <Button
-        android:id="@+id/btnUpdateDetailSV"
-        android:text="Sửa Thông tin"
-        android:background="@drawable/custom_edittext"
-        android:layout_margin="10dp"
-        android:layout_below="@id/layoutSV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/btnDeleteDetailSV"
-        android:text="Xóa Sinh viên"
-        android:background="@drawable/custom_edittext"
-        android:layout_margin="10dp"
-        android:layout_below="@id/btnUpdateDetailSV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
         android:background="@drawable/custom_edittext"
         android:weightSum="2"
         android:layout_margin="20dp"
         android:orientation="horizontal"
+        android:paddingBottom="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -105,6 +94,8 @@
             android:text="Ảnh Sinh viên: "
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+
     </LinearLayout>
     <LinearLayout
         android:layout_weight="1"
@@ -113,7 +104,7 @@
         <ListView
             android:id="@+id/list_DetailSV"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
         </ListView>
 
@@ -121,7 +112,7 @@
 
     </LinearLayout>
 
-
+    </ScrollView>
 
 
 

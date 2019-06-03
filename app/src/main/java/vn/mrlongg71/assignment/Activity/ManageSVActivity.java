@@ -13,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -30,6 +31,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.Switch;
@@ -64,6 +66,7 @@ public class ManageSVActivity extends AppCompatActivity {
     SpinnerAdapter adapterSpiner;
     StudentsAdapter studentsAdapter;
     ListView listViewSV;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,8 +157,8 @@ public class ManageSVActivity extends AppCompatActivity {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.custom_dialog_chooseanhsv);
-        Button btnChooseAnhFile = dialog.findViewById(R.id.btnchooseanhFile);
-        Button btnChooseAnhCamera = dialog.findViewById(R.id.btnchooseanhCamera);
+        ImageView btnChooseAnhFile = dialog.findViewById(R.id.btnchooseanhFile);
+        ImageView btnChooseAnhCamera = dialog.findViewById(R.id.btnchooseanhCamera);
 
 
         btnChooseAnhCamera.setOnClickListener(new View.OnClickListener() {
@@ -265,6 +268,7 @@ public class ManageSVActivity extends AppCompatActivity {
     btnAddSV = findViewById(R.id.btnAddSV);
     imgAnhSVTam = findViewById(R.id.imgAnhSVTam);
     btnAddAnhSVManage = findViewById(R.id.btnAddAnhSVManage);
+    progressBar = findViewById(R.id.progressbar_manager);
     //nhận iduser từ home
         Intent intent = getIntent();
         iduser = intent.getIntExtra("iduser" , -1);
@@ -286,17 +290,34 @@ public class ManageSVActivity extends AppCompatActivity {
         }
     }
     public void insertDataSV() {
-        String tenSV = edtTenSV.getText().toString().trim();
-        String date = edtDate.getText().toString().trim();
+        final String tenSV = edtTenSV.getText().toString().trim();
+        final String date = edtDate.getText().toString().trim();
         //chuyeern img ->byte
         BitmapDrawable bitmapDrawable = (BitmapDrawable) imgAnhSVTam.getDrawable();
         Bitmap bitmap = bitmapDrawable.getBitmap();
         ByteArrayOutputStream arr_byte = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, arr_byte);
-        byte[] imgAnhSV = arr_byte.toByteArray();
+        final byte[] imgAnhSV = arr_byte.toByteArray();
+        progressBar.setVisibility(View.VISIBLE);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                boolean checkfinish = true;
+                if(checkfinish){
+                    MainActivity.database.INSERT_SV(tenSV, date, idclass, iduser, tenlop, "0", "null", "null", imgAnhSV);
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(ManageSVActivity.this, "Đã thêm thành công Sinh viên " + tenSV, Toast.LENGTH_SHORT).show();
+                    GetDataClass_SV();
+                }else{
+                    checkfinish = false;
+                    Toast.makeText(ManageSVActivity.this, "Thêm thất bại!", Toast.LENGTH_SHORT).show();
 
-            MainActivity.database.INSERT_SV(tenSV, date, idclass, iduser, tenlop, "null", "null", "null", imgAnhSV);
-            Toast.makeText(this, "Đã thêm thành công Sinh viên " + tenSV, Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+        }, 1000);
+
 
     }
     private void GetDataClass_SV(){

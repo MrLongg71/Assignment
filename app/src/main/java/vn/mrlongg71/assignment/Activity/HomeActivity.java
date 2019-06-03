@@ -2,10 +2,13 @@ package vn.mrlongg71.assignment.Activity;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -163,6 +166,8 @@ public class HomeActivity extends AppCompatActivity
         String tenlop = edtTenLop.getText().toString().trim();
         MainActivity.database.INSERT_CLASS(malop,tenlop,iduser);
         Toast.makeText(this, "Đã thêm thành công lớp " + tenlop, Toast.LENGTH_SHORT).show();
+
+
     }
 
     //phím back
@@ -209,14 +214,28 @@ public class HomeActivity extends AppCompatActivity
 
             DialogAddclass();
         } else if (id == R.id.nav_seeClass) {
-
+            Intent intent = new Intent(HomeActivity.this, SeeClassListActivity.class);
+            intent.putExtra("iduser" ,  iduser);
+            startActivity(intent);
         }else if(id == R.id.nav_manageClass){
-
+            Intent intent = new Intent(HomeActivity.this, ManageSVActivity.class);
+            intent.putExtra("iduser" , iduser);
+            startActivity(intent);
         }else if (id == R.id.info_user) {
             Intent intent = new Intent(this, InfoUserActivity.class);
             intent.putExtra("id" , iduser);
             startActivity(intent);
         } else if (id == R.id.info_tacgia) {
+            final Dialog dialog = new Dialog(this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.custom_dialog_info);
+            dialog.show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    dialog.dismiss();
+                }
+            },2000);
 
 
         }

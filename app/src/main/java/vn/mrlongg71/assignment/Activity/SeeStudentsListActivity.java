@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -22,14 +25,14 @@ import vn.mrlongg71.assignment.R;
 
 public class SeeStudentsListActivity extends AppCompatActivity {
 
-    ListView listSV;
-    ArrayList<Students> studentsArrayList;
+     ListView listSV;
+     ArrayList<Students> studentsArrayList;
     ArrayList<AddClass>  arr_listSpiner;
-    SVAdapter svAdapter;
+      SVAdapter svAdapter;
     SpinerClassAdapter spinnerAdapter;
     Spinner spinnerClass;
     Toolbar toolbar;
-    int iduser,idclass,idsv;
+    public   int iduser,idclass,idsv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +129,26 @@ public class SeeStudentsListActivity extends AppCompatActivity {
         }
         svAdapter.notifyDataSetChanged();
     }
+    public  void GetDataSVSearch() {
+        Cursor dataSV = MainActivity.database.GetData("SELECT * FROM Students WHERE iduser = '"+ iduser+ "'");
+        studentsArrayList.clear();
+        while (dataSV.moveToNext()){
+            int id = dataSV.getInt(0);
+            String tenSV = dataSV.getString(1);
+            String date = dataSV.getString(2);
+            int idclass = dataSV.getInt(3);
+            iduser = dataSV.getInt(4);
+            String tenlop = dataSV.getString(5);
+            String sdt = dataSV.getString(6);
+            String email = dataSV.getString(7);
+            String place = dataSV.getString(8);
+            studentsArrayList.add(new Students(id,tenSV,date,idclass,iduser, tenlop, sdt, email,place, dataSV.getBlob(9)));
+        }
+        svAdapter = new SVAdapter(SeeStudentsListActivity.this, R.layout.custom_list_seesv, studentsArrayList);
+        listSV.setAdapter(svAdapter);
+
+        svAdapter.notifyDataSetChanged();
+    }
     private void GetDataSpinerClass() {
         Cursor dataClass = MainActivity.database.GetData("SELECT * FROM Class WHERE iduser = '" + iduser + "'");
         while (dataClass.moveToNext()){
@@ -149,5 +172,35 @@ public class SeeStudentsListActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search, menu);
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+
+          searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+              @Override
+              public boolean onQueryTextSubmit(String s) {
+                  return false;
+              }
+
+              @Override
+              public boolean onQueryTextChange(String s) {
+                  Log.d("AAA", s );
+
+                  GetDataSVSearch();
+                  svAdapter.search(s);
+                  svAdapter.notifyDataSetChanged();
+
+
+                  return false;
+              }
+          });
+
+
+
+        return super.onCreateOptionsMenu(menu);
     }
 }

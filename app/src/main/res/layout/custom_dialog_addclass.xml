@@ -79,7 +79,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:weightSum="2"
+        android:weightSum="3"
         android:layout_below="@+id/layoutTenLop"
         android:padding="5dp"
         android:orientation="horizontal">
@@ -87,10 +87,10 @@
             android:id="@+id/btnaddclass_dialog"
             android:drawableLeft="@drawable/add"
             android:layout_margin="5dp"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:textColor="#FFFFFF"
             android:padding="7dp"
-            android:background="@color/group_orgin"
+            android:background="@drawable/custom_button"
             android:text="Thêm Lớp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -99,10 +99,11 @@
             android:id="@+id/btndelete_dialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_button"
             android:layout_margin="5dp"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:padding="7dp"
-            android:background="@color/group_orgin"
+
             android:drawableLeft="@drawable/delete"
             android:text="Xóa Trắng "
             android:textColor="#FFFFFF" />

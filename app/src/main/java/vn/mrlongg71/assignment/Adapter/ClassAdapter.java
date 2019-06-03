@@ -9,7 +9,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import vn.mrlongg71.assignment.Model.AddClass;
@@ -20,11 +22,15 @@ public class ClassAdapter extends BaseAdapter {
     private SeeClassListActivity context;
     private  int layout;
     public static List<AddClass> addClassList;
+    public ArrayList<AddClass> arrayListCopy;
 
     public ClassAdapter(SeeClassListActivity context, int layout, List<AddClass> addClassList) {
         this.context = context;
         this.layout = layout;
         this.addClassList = addClassList;
+        this.arrayListCopy = new ArrayList<>();
+        this.arrayListCopy.addAll(addClassList);
+
     }
 
     @Override
@@ -70,5 +76,23 @@ public class ClassAdapter extends BaseAdapter {
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.scale_listview);
         view.startAnimation(animation);
         return view;
+    }
+
+    //searchclass
+    public void search(String text){
+
+        text = text.toLowerCase();
+        addClassList.clear();
+        //nếu ô tìm kiếm không có -> add lại mảng  :
+        if(text.length() == 0){
+            addClassList.addAll(arrayListCopy);
+        }else{
+            for(AddClass addclass : arrayListCopy){
+                if(addclass.getTenlop().toLowerCase().contains(text)){
+                    addClassList.add(addclass);
+                }
+                notifyDataSetChanged();
+            }
+        }
     }
 }

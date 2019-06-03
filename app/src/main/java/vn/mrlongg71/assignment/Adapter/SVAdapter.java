@@ -1,6 +1,8 @@
 package vn.mrlongg71.assignment.Adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.lang.annotation.Annotation;
+import java.util.ArrayList;
 import java.util.List;
 
+import vn.mrlongg71.assignment.Activity.SeeClassListActivity;
+import vn.mrlongg71.assignment.Activity.SeeStudentsListActivity;
 import vn.mrlongg71.assignment.Model.AddClass;
 import vn.mrlongg71.assignment.Model.Students;
 import vn.mrlongg71.assignment.R;
@@ -21,12 +26,15 @@ public class SVAdapter extends BaseAdapter {
     Context context;
     int layout;
     List<Students> studentsList;
+    public ArrayList<Students> arrayListCopy;
    public static Students students;
 
     public SVAdapter(Context context, int layout, List<Students> studentsList) {
         this.context = context;
         this.layout = layout;
         this.studentsList = studentsList;
+        this.arrayListCopy = new ArrayList<>();
+        arrayListCopy.addAll(studentsList);
     }
 
     @Override
@@ -46,7 +54,7 @@ public class SVAdapter extends BaseAdapter {
     public class ViewHolder{
 
         ImageView imgAnhSV;
-        TextView txtTenSv, txtLop;
+        TextView txtTenSv, txtDate;
 
     }
 
@@ -59,7 +67,7 @@ public class SVAdapter extends BaseAdapter {
             convertView = inflater.inflate(layout, null);
             viewHolder.imgAnhSV = convertView.findViewById(R.id.imgAnhSV);
             viewHolder.txtTenSv = convertView.findViewById(R.id.txtTensv_SeeSV);
-            viewHolder.txtLop = convertView.findViewById(R.id.txtLopsv_SeeSV);
+            viewHolder.txtDate = convertView.findViewById(R.id.txtDatesv_SeeSV);
             convertView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -67,7 +75,10 @@ public class SVAdapter extends BaseAdapter {
 
          students = studentsList.get(position);
         viewHolder.txtTenSv.setText(students.getTenSV());
-        viewHolder.txtLop.setText(students.getDate());
+        viewHolder.txtDate.setText(students.getDate());
+        byte[] imgSV = students.getImages();
+        Bitmap bitmap = BitmapFactory.decodeByteArray(imgSV , 0, imgSV.length);
+        viewHolder.imgAnhSV.setImageBitmap(bitmap);
 
         //gán animotion
         Animation animation = AnimationUtils.loadAnimation(context,R.anim.scale_listview);
@@ -76,4 +87,22 @@ public class SVAdapter extends BaseAdapter {
 
         return convertView;
     }
+    //searchclass
+    public void search(String text){
+
+        text = text.toLowerCase();
+        studentsList.clear();
+        //nếu ô tìm kiếm không có -> add lại mảng  :
+        if(text.length() == 0){
+            studentsList.addAll(arrayListCopy);
+        }else{
+            for(Students students  : arrayListCopy){
+                if(students.getTenSV().toLowerCase().contains(text)){
+                    studentsList.add(students);
+                }
+                notifyDataSetChanged();
+            }
+        }
+    }
+
 }

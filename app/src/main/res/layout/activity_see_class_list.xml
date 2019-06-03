@@ -6,11 +6,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".Activity.SeeClassListActivity">
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/Apptoolbar_SeeClass"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar_SeeClass"
             android:background="@color/group_orgin"
@@ -18,9 +14,10 @@
             app:navigationIcon="@drawable/back"
             app:titleTextColor="#FFFFFF"
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize">
+            android:layout_height="?actionBarSize"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark" >
         </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
+
     <LinearLayout
         android:orientation="horizontal"
         android:background="#03A9F4"
