@@ -255,7 +255,7 @@ public class DetailSVActivity extends AppCompatActivity {
                 String diachinew = edtDiachiSVUpdate.getText().toString().trim();
 
                 if(tenSVnew.length() == 0 || ngaysinhSVnew.length() == 0 || sdtnew.length() == 0 || emailnew.length() == 0 || diachinew.length() == 0){
-                    Toast.makeText(DetailSVActivity.this, "Vui lòng điều đủ htông tin!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailSVActivity.this, "Vui lòng điều đủ thông tin!", Toast.LENGTH_SHORT).show();
                 }else{
                     MainActivity.database.QueryData("UPDATE Students SET id = '"+id+"' ,tensv = '"+tenSVnew+"',ngaysinh = '"+ngaysinhSVnew+"', idclass = '"+idclass+"', iduser = '"+iduser+"', tenlop = '"+tenlopnew+"',sdt = '"+sdtnew+"', email = '"+emailnew+"', place = '"+diachinew+"' WHERE id = '"+idsv+"'  AND iduser = '"+iduser+"'");
                     Toast.makeText(DetailSVActivity.this, "Đã cập nhật!", Toast.LENGTH_SHORT).show();
