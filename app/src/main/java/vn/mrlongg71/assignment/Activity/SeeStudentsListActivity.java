@@ -34,7 +34,6 @@ public class SeeStudentsListActivity extends AppCompatActivity {
     SpinerClassAdapter spinnerAdapter;
     Spinner spinnerClass;
     Toolbar toolbar;
-    private static final String ACTION_VOICE_SEARCH = "com.google.android.gms.actions.SEARCH_ACTION";
     public int iduser, idclass, idsv;
     SearchView searchView;
 
@@ -71,7 +70,7 @@ public class SeeStudentsListActivity extends AppCompatActivity {
                 idsv = studentsArrayList.get(position).getId();
 
                 intent.putExtra("idsv", idsv);
-//                intent.putExtra("idclass" , idclass);
+//
                 startActivity(intent);
                 finish();
             }
@@ -94,10 +93,11 @@ public class SeeStudentsListActivity extends AppCompatActivity {
                 idclass = arr_listSpiner.get(position).getId();
                 if (idclass == 0) {
                     Toast.makeText(SeeStudentsListActivity.this, "Vui lòng chọn một lớp!", Toast.LENGTH_SHORT).show();
-                    GetDataSV();
+                     GetDataSV();
                 } else {
-                    Toast.makeText(SeeStudentsListActivity.this, "Đã cập nhật danh sách!", Toast.LENGTH_SHORT).show();
-                    GetDataSV();
+                        Toast.makeText(SeeStudentsListActivity.this, "Đã cập nhật danh sách!", Toast.LENGTH_SHORT).show();
+                        GetDataSV();
+
                 }
             }
 
@@ -141,6 +141,7 @@ public class SeeStudentsListActivity extends AppCompatActivity {
             String place = dataSV.getString(8);
 
             studentsArrayList.add(new Students(id, tenSV, date, idclass, iduser, tenlop, sdt, email, place, dataSV.getBlob(9)));
+
         }
         svAdapter.notifyDataSetChanged();
     }

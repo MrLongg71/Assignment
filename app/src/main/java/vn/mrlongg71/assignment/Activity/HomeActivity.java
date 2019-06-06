@@ -164,8 +164,12 @@ public class HomeActivity extends AppCompatActivity
     public void InsertDataClass(){
         String malop = edtMaLop.getText().toString().trim();
         String tenlop = edtTenLop.getText().toString().trim();
-        MainActivity.database.INSERT_CLASS(malop,tenlop,iduser);
-        Toast.makeText(this, "Đã thêm thành công lớp " + tenlop, Toast.LENGTH_SHORT).show();
+        if(malop.length() == 0 || tenlop.length() == 0){
+            Toast.makeText(this, "Vui lòng nhập đủ thông tin!", Toast.LENGTH_SHORT).show();
+        }else{
+            MainActivity.database.INSERT_CLASS(malop,tenlop,iduser);
+            Toast.makeText(this, "Đã thêm thành công lớp " + tenlop, Toast.LENGTH_SHORT).show();
+        }
 
 
     }

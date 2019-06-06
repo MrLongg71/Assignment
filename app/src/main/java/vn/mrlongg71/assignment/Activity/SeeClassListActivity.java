@@ -46,10 +46,10 @@ public class SeeClassListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_see_class_list);
         
         anhxa();
-       Toolbar();
+        Toolbar();
         GetDataClass();
         //click item listview
-        clickListview();
+         clickListview();
 
 
     }
@@ -118,11 +118,16 @@ public class SeeClassListActivity extends AppCompatActivity {
                 addClassArrayList.clear();
                 String malopMoi = edtMalopUdate.getText().toString().trim();
                 String tenlopMoi = edtTenlopupdate.getText().toString().trim();
-                MainActivity.database.QueryData("UPDATE Class SET malop = '"+malopMoi+"' , tenlop = '"+tenlopMoi+"' WHERE id = '"+id+"'");
-                GetDataClass();
-                dialog.dismiss();
-                Toast.makeText(SeeClassListActivity.this, "Đã cập nhật lớp" + tenlopMoi , Toast.LENGTH_SHORT).show();
-            }
+                if(malopMoi.length() ==0 || tenlopMoi.length() == 0){
+                    Toast.makeText(SeeClassListActivity.this, "Vui lòng điền đủ thông tin!", Toast.LENGTH_SHORT).show();
+                }else{
+                    MainActivity.database.QueryData("UPDATE Class SET malop = '"+malopMoi+"' , tenlop = '"+tenlopMoi+"' WHERE id = '"+id+"'");
+                    GetDataClass();
+                    dialog.dismiss();
+                    Toast.makeText(SeeClassListActivity.this, "Đã cập nhật lớp" + tenlopMoi , Toast.LENGTH_SHORT).show();
+
+                }
+                       }
         });
         //btn hủy ->đóng dialog
         img_huy_updateClass.setOnClickListener(new View.OnClickListener() {

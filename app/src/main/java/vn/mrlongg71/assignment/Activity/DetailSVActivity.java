@@ -44,7 +44,6 @@ public class DetailSVActivity extends AppCompatActivity {
 
     ListView listSVDetail;
     ArrayList<Students> arr_DetailSv;
-
     DetailSVAdapter detailSVAdapter;
     EditText edtTenSVUpdate, edtNgaysinhSVupdate, edtSDTSvUpdate, edtEmailSVUpdate, edtDiachiSVUpdate;
     Toolbar toolbar;
@@ -52,7 +51,7 @@ public class DetailSVActivity extends AppCompatActivity {
     ArrayList<AddClass> Arr_spiner;
     SpinerClassAdapter spinerClassAdapter;
     int iduser, idclass,idsv;
-    String tenlop;
+    String tenlopnew;
     String sdt,email,place;
     final int REQUES_CODE_CALL = 123;
     final int REQUES_CODE_EMAIL = 456;
@@ -100,8 +99,6 @@ public class DetailSVActivity extends AppCompatActivity {
                             dialog.dismiss();
                        }
 
-
-
                         }
                 });
                 imgemailnow.setOnClickListener(new View.OnClickListener() {
@@ -115,7 +112,6 @@ public class DetailSVActivity extends AppCompatActivity {
                             ActivityCompat.requestPermissions(DetailSVActivity.this, new String[]{Manifest.permission.SEND_SMS}, REQUES_CODE_EMAIL);
                             dialog.dismiss();
                         }
-
 
 
                     }
@@ -238,7 +234,7 @@ public class DetailSVActivity extends AppCompatActivity {
             }
         });
         Spiner();
-        spinerTenlopSVUpdate.setSelection(idclass);
+        spinerTenlopSVUpdate.setSelection(idclass -1);
 
 
         btnHuyUpdateSv.setOnClickListener(new View.OnClickListener() {
@@ -247,24 +243,29 @@ public class DetailSVActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+
+
         btnUpdateSV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String tenSVnew  = edtTenSVUpdate.getText().toString().trim();
                 String ngaysinhSVnew = edtNgaysinhSVupdate.getText().toString().trim();
-                //String tenLopnew = spinerTenlopSVUpdate.getText().toString().trim();
                 String sdtnew = edtSDTSvUpdate.getText().toString().trim();
                 String emailnew = edtEmailSVUpdate.getText().toString().trim();
                 String diachinew = edtDiachiSVUpdate.getText().toString().trim();
 
-                MainActivity.database.QueryData("UPDATE Students SET id = '"+id+"' ,tensv = '"+tenSVnew+"',ngaysinh = '"+ngaysinhSVnew+"', idclass = '"+idclass+"', iduser = '"+iduser+"', tenlop = '"+tenLop+"',sdt = '"+sdtnew+"', email = '"+emailnew+"', place = '"+diachinew+"' WHERE id = '"+idsv+"' AND idclass = '"+idclass+"'  AND iduser = '"+iduser+"'");
-                Toast.makeText(DetailSVActivity.this, "Đã cập nhật!", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-                GetDataSV_Detail();
-                detailSVAdapter.notifyDataSetChanged();
-                startActivity(new Intent(DetailSVActivity.this, SeeStudentsListActivity.class));
+                if(tenSVnew.length() == 0 || ngaysinhSVnew.length() == 0 || sdtnew.length() == 0 || emailnew.length() == 0 || diachinew.length() == 0){
+                    Toast.makeText(DetailSVActivity.this, "Vui lòng điều đủ htông tin!", Toast.LENGTH_SHORT).show();
+                }else{
+                    MainActivity.database.QueryData("UPDATE Students SET id = '"+id+"' ,tensv = '"+tenSVnew+"',ngaysinh = '"+ngaysinhSVnew+"', idclass = '"+idclass+"', iduser = '"+iduser+"', tenlop = '"+tenlopnew+"',sdt = '"+sdtnew+"', email = '"+emailnew+"', place = '"+diachinew+"' WHERE id = '"+idsv+"'  AND iduser = '"+iduser+"'");
+                    Toast.makeText(DetailSVActivity.this, "Đã cập nhật!", Toast.LENGTH_SHORT).show();
 
-                finish();
+                    dialog.dismiss();
+                    GetDataSV_Detail();
+                    detailSVAdapter.notifyDataSetChanged();
+                }
+
+
             }
         });
         dialog.show();
@@ -310,14 +311,14 @@ public class DetailSVActivity extends AppCompatActivity {
         GetDataSV_Detail();
     }
     private void GetDataSV_Detail() {
-        Cursor dataSV = MainActivity.database.GetData("SELECT * FROM Students WHERE id = '"+idsv+"'  AND iduser = '"+iduser+"'");
+        Cursor dataSV = MainActivity.database.GetData("SELECT * FROM Students WHERE id = '"+idsv+"' AND idclass = '"+idclass+"' AND iduser = '"+iduser+"'");
         arr_DetailSv.clear();
         while (dataSV.moveToNext()){
             int id = dataSV.getInt(0);
             String tenSV = dataSV.getString(1);
             String date = dataSV.getString(2);
-            int idclass = dataSV.getInt(3);
-            int iduser = dataSV.getInt(4);
+             idclass = dataSV.getInt(3);
+             iduser = dataSV.getInt(4);
             String tenlop = dataSV.getString(5);
             String sdt = dataSV.getString(6);
             String email = dataSV.getString(7);
@@ -369,8 +370,7 @@ public class DetailSVActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 idclass = Arr_spiner.get(position).getId();
 
-                tenlop = Arr_spiner.get(position).getTenlop();
-                Toast.makeText(DetailSVActivity.this, "" + tenlop, Toast.LENGTH_SHORT).show();
+                tenlopnew = Arr_spiner.get(position).getTenlop();
             }
 
             @Override
@@ -392,7 +392,6 @@ public class DetailSVActivity extends AppCompatActivity {
         }
         spinerClassAdapter.notifyDataSetChanged();
     }
-
 
     private void anhxa() {
 
