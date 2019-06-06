@@ -91,13 +91,16 @@ public class SVAdapter extends BaseAdapter {
     public void search(String text){
 
         text = text.toLowerCase();
-        studentsList.clear();
+
         //nếu ô tìm kiếm không có -> add lại mảng  :
         if(text.length() == 0){
             studentsList.addAll(arrayListCopy);
         }else{
+            studentsList.clear();
             for(Students students  : arrayListCopy){
+
                 if(students.getTenSV().toLowerCase().contains(text)){
+
                     studentsList.add(students);
                 }
                 notifyDataSetChanged();

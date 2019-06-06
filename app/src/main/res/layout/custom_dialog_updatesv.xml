@@ -38,11 +38,9 @@
             android:hint="Nhập ngày sinh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <EditText
+        <Spinner
             android:id="@+id/edtTenlopSVUpdate"
             android:layout_margin="10dp"
-            android:hint="Nhập tên lớp"
-            android:enabled="false"
             android:background="@drawable/custom_edittext"
             android:drawableLeft="@drawable/school"
             android:layout_width="match_parent"

@@ -47,8 +47,9 @@
         <TextView
             android:id="@+id/txtEmailSVDetail"
             android:textColor="#2196F3"
-            android:textSize="15sp"
+            android:textSize="20sp"
             android:text="Tên"
+            android:singleLine="true"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

@@ -3,6 +3,7 @@ package vn.mrlongg71.assignment.Activity;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,15 +22,21 @@ import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import vn.mrlongg71.assignment.Adapter.DetailSVAdapter;
 import vn.mrlongg71.assignment.Adapter.SVAdapter;
+import vn.mrlongg71.assignment.Adapter.SpinerClassAdapter;
+import vn.mrlongg71.assignment.Model.AddClass;
 import vn.mrlongg71.assignment.Model.Students;
 import vn.mrlongg71.assignment.R;
 
@@ -39,9 +46,13 @@ public class DetailSVActivity extends AppCompatActivity {
     ArrayList<Students> arr_DetailSv;
 
     DetailSVAdapter detailSVAdapter;
-    EditText edtTenSVUpdate, edtNgaysinhSVupdate, edtTenlopSVUpdate, edtSDTSvUpdate, edtEmailSVUpdate, edtDiachiSVUpdate;
+    EditText edtTenSVUpdate, edtNgaysinhSVupdate, edtSDTSvUpdate, edtEmailSVUpdate, edtDiachiSVUpdate;
     Toolbar toolbar;
+    Spinner spinerTenlopSVUpdate;
+    ArrayList<AddClass> Arr_spiner;
+    SpinerClassAdapter spinerClassAdapter;
     int iduser, idclass,idsv;
+    String tenlop;
     String sdt,email,place;
     final int REQUES_CODE_CALL = 123;
     final int REQUES_CODE_EMAIL = 456;
@@ -200,7 +211,7 @@ public class DetailSVActivity extends AppCompatActivity {
 
 
     //updateSV
-    private void dialogUpdateSV(final int id, final String tenSV, String ngaysinhSV, String tenLop, String sdt, String email, String diachi) {
+    private void dialogUpdateSV(final int id, final String tenSV, String ngaysinhSV, final String tenLop, String sdt, String email, String diachi) {
 
         final Dialog dialog = new Dialog(this);
 
@@ -211,16 +222,24 @@ public class DetailSVActivity extends AppCompatActivity {
 
         edtTenSVUpdate = dialog.findViewById(R.id.edtTenSVUpdate);
         edtNgaysinhSVupdate = dialog.findViewById(R.id.edtNgaySinhSVUpdate);
-        edtTenlopSVUpdate = dialog.findViewById(R.id.edtTenlopSVUpdate);
+        spinerTenlopSVUpdate = dialog.findViewById(R.id.edtTenlopSVUpdate);
         edtSDTSvUpdate = dialog.findViewById(R.id.edtSDTSVUpdate);
         edtEmailSVUpdate = dialog.findViewById(R.id.edtEmailSVUpdate);
         edtDiachiSVUpdate = dialog.findViewById(R.id.edtDiaChiSVUpdate);
         edtTenSVUpdate.setText(tenSV);
         edtNgaysinhSVupdate.setText(ngaysinhSV);
-        edtTenlopSVUpdate.setText(tenLop);
         edtSDTSvUpdate.setText(sdt);
         edtEmailSVUpdate.setText(email);
         edtDiachiSVUpdate.setText(diachi);
+        edtNgaysinhSVupdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogDate();
+            }
+        });
+        Spiner();
+        spinerTenlopSVUpdate.setSelection(idclass);
+
 
         btnHuyUpdateSv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -233,19 +252,19 @@ public class DetailSVActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String tenSVnew  = edtTenSVUpdate.getText().toString().trim();
                 String ngaysinhSVnew = edtNgaysinhSVupdate.getText().toString().trim();
-                String tenLopnew = edtTenlopSVUpdate.getText().toString().trim();
+                //String tenLopnew = spinerTenlopSVUpdate.getText().toString().trim();
                 String sdtnew = edtSDTSvUpdate.getText().toString().trim();
                 String emailnew = edtEmailSVUpdate.getText().toString().trim();
                 String diachinew = edtDiachiSVUpdate.getText().toString().trim();
 
-                MainActivity.database.QueryData("UPDATE Students SET id = '"+id+"' ,tensv = '"+tenSVnew+"',ngaysinh = '"+ngaysinhSVnew+"', idclass = '"+idclass+"', iduser = '"+iduser+"', tenlop = '"+tenLopnew+"',sdt = '"+sdtnew+"', email = '"+emailnew+"', place = '"+diachinew+"' WHERE id = '"+idsv+"' AND idclass = '"+idclass+"' AND iduser = '"+iduser+"'");
+                MainActivity.database.QueryData("UPDATE Students SET id = '"+id+"' ,tensv = '"+tenSVnew+"',ngaysinh = '"+ngaysinhSVnew+"', idclass = '"+idclass+"', iduser = '"+iduser+"', tenlop = '"+tenLop+"',sdt = '"+sdtnew+"', email = '"+emailnew+"', place = '"+diachinew+"' WHERE id = '"+idsv+"' AND idclass = '"+idclass+"'  AND iduser = '"+iduser+"'");
                 Toast.makeText(DetailSVActivity.this, "Đã cập nhật!", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
                 GetDataSV_Detail();
                 detailSVAdapter.notifyDataSetChanged();
-//                startActivity(new Intent(DetailSVActivity.this, SeeStudentsListActivity.class));
-//
-//                finish();
+                startActivity(new Intent(DetailSVActivity.this, SeeStudentsListActivity.class));
+
+                finish();
             }
         });
         dialog.show();
@@ -264,11 +283,11 @@ public class DetailSVActivity extends AppCompatActivity {
         aBuilder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                MainActivity.database.QueryData("DELETE FROM Students WHERE id = '"+idsv+"' AND idclass = '"+idclass+"' AND iduser = '"+iduser+"'");
+                MainActivity.database.QueryData("DELETE FROM Students WHERE id = '"+idsv+"' AND iduser = '"+iduser+"'");
                 Toast.makeText(getApplicationContext(), "Đã xóa thành công!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(DetailSVActivity.this, HomeActivity.class));
-                finishActivity(123);
-
+                GetDataSV_Detail();
+                startActivity(new Intent(DetailSVActivity.this, SeeStudentsListActivity.class));
+                finish();
             }
         });
         aBuilder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
@@ -291,7 +310,7 @@ public class DetailSVActivity extends AppCompatActivity {
         GetDataSV_Detail();
     }
     private void GetDataSV_Detail() {
-        Cursor dataSV = MainActivity.database.GetData("SELECT * FROM Students WHERE id = '"+idsv+"' AND idclass = '"+idclass+"' AND iduser = '"+iduser+"'");
+        Cursor dataSV = MainActivity.database.GetData("SELECT * FROM Students WHERE id = '"+idsv+"'  AND iduser = '"+iduser+"'");
         arr_DetailSv.clear();
         while (dataSV.moveToNext()){
             int id = dataSV.getInt(0);
@@ -322,6 +341,57 @@ public class DetailSVActivity extends AppCompatActivity {
 
     }
 
+
+    public  void DialogDate(){
+        final Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DATE);
+        int month = calendar.get(Calendar.MONTH);
+        int year = calendar.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                // i i1 i2 -> năm tháng ngày
+                calendar.set(i, i1,i2);
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                        edtNgaysinhSVupdate.setText(simpleDateFormat.format(calendar.getTime()));
+            }
+        }, year,month,day);
+        datePickerDialog.show();
+    }
+    private void Spiner() {
+        Arr_spiner = new ArrayList<>();
+        spinerClassAdapter = new SpinerClassAdapter(this, R.layout.custom_list_spiner_class, Arr_spiner);
+        spinerTenlopSVUpdate.setAdapter(spinerClassAdapter);
+        GetDataClass_Spiner();
+        spinerTenlopSVUpdate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                idclass = Arr_spiner.get(position).getId();
+
+                tenlop = Arr_spiner.get(position).getTenlop();
+                Toast.makeText(DetailSVActivity.this, "" + tenlop, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+    }
+    private void GetDataClass_Spiner() {
+        Cursor dataSpiner = MainActivity.database.GetData("SELECT * FROM Class WHERE iduser = '" + iduser + "'");
+        while (dataSpiner.moveToNext()) {
+            int id = dataSpiner.getInt(0);
+            String malop = dataSpiner.getString(1);
+            String tenlop = dataSpiner.getString(2);
+            iduser = dataSpiner.getInt(3);
+            Arr_spiner.add(new AddClass(id, malop, tenlop, iduser));
+        }
+        spinerClassAdapter.notifyDataSetChanged();
+    }
 
 
     private void anhxa() {

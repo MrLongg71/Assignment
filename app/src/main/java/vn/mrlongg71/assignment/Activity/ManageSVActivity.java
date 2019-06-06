@@ -243,7 +243,7 @@ public class ManageSVActivity extends AppCompatActivity {
     }
 
     //dialog date
-    private void DialogDate(){
+    public  void DialogDate(){
         final Calendar calendar = Calendar.getInstance();
         int day = calendar.get(Calendar.DATE);
         int month = calendar.get(Calendar.MONTH);
