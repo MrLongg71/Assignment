@@ -57,6 +57,7 @@ public class ManageSVActivity extends AppCompatActivity {
     Toolbar toolbar;
     int iduser,idclass;
     String tenlop;
+
     final int REQUSE_CODE_CAMERA = 123;
     final int REQUES_CODE_FILE = 456;
     Spinner spinner;
@@ -92,15 +93,32 @@ public class ManageSVActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //idclass = 0 -> "Chọn lớp" -> null
+//                for(int i = 0; i < imgAnhSV.length ; i++){
+//                    if(imgAnhSV[i] != 0){
+//                        Toast.makeText(ManageSVActivity.this, "ok", Toast.LENGTH_SHORT).show();
+//                    }else{
+//
+//                    }
+//
+//                }
               if(idclass == 0){
                   Toast.makeText(ManageSVActivity.this, "Vui lòng chọn một lớp!", Toast.LENGTH_SHORT).show();
               }else if(edtTenSV.length() == 0){
                   Toast.makeText(ManageSVActivity.this, "Vui lòng nhập Tên", Toast.LENGTH_SHORT).show();
               }else if(edtDate.length() == 0){
                   Toast.makeText(ManageSVActivity.this, "Vui lòng nhập Ngày sinh", Toast.LENGTH_SHORT).show();
-              }else{
-                  insertDataSV();
-                  GetDataClass_SV();
+              }
+              else{
+                  try {
+                      insertDataSV();
+                      GetDataClass_SV();
+
+                  }catch (Exception e ){
+                      Toast.makeText(ManageSVActivity.this, "Vui lòng chọn ảnh!", Toast.LENGTH_SHORT).show();
+
+
+                  }
+
               }
 
 
@@ -209,11 +227,6 @@ public class ManageSVActivity extends AppCompatActivity {
                 }
 
 
-
-
-
-
-
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
@@ -232,7 +245,6 @@ public class ManageSVActivity extends AppCompatActivity {
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                 imgAnhSVTam.setImageBitmap(bitmap);
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
             }
         }
 
@@ -295,21 +307,23 @@ public class ManageSVActivity extends AppCompatActivity {
         //chuyeern img ->byte
         BitmapDrawable bitmapDrawable = (BitmapDrawable) imgAnhSVTam.getDrawable();
         Bitmap bitmap = bitmapDrawable.getBitmap();
-        ByteArrayOutputStream arr_byte = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, arr_byte);
-        final byte[] imgAnhSV = arr_byte.toByteArray();
+        final ByteArrayOutputStream arr_byte = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, arr_byte);
+
+        final byte[] imgAnhSV =   arr_byte.toByteArray();
+
         progressBar.setVisibility(View.VISIBLE);
-        new Handler().postDelayed(new Runnable() {
+        new Handler().postDelayed (new Runnable() {
             @Override
             public void run() {
-                boolean checkfinish = true;
-                if(checkfinish){
-                    MainActivity.database.INSERT_SV(tenSV, date, idclass, iduser, tenlop, "0", "null", "null", imgAnhSV);
-                    progressBar.setVisibility(View.GONE);
-                    Toast.makeText(ManageSVActivity.this, "Đã thêm thành công Sinh viên " + tenSV, Toast.LENGTH_SHORT).show();
-                    GetDataClass_SV();
-                }else{
-                    checkfinish = false;
+                try {
+
+                            MainActivity.database.INSERT_SV(tenSV, date, idclass, iduser, tenlop, "0", "null", "null", imgAnhSV);
+
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(ManageSVActivity.this, "Đã thêm thành công Sinh viên " + tenSV, Toast.LENGTH_SHORT).show();
+                            GetDataClass_SV();
+                }catch (Exception e){
                     Toast.makeText(ManageSVActivity.this, "Thêm thất bại!", Toast.LENGTH_SHORT).show();
 
                 }

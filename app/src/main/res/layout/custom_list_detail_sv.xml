@@ -29,7 +29,7 @@
             android:layout_height="wrap_content" />
         <TextView
         android:id="@+id/txtTenLopDetail"
-            android:textColor="#2196F3"
+        android:textColor="#2196F3"
         android:layout_margin="10dp"
         android:textSize="20sp"
 
@@ -62,12 +62,15 @@
             android:text="Tên"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <ImageView
+
+
+        <vn.mrlongg71.assignment.View.ImageHelper
             android:id="@+id/imgAnhSVdetail"
             android:layout_below="@+id/Apptoolbar_Detail"
-            android:src="@drawable/user"
             android:layout_width="100dp"
-            android:layout_height="80dp" />
+            android:layout_height="100dp"
+            android:src="@drawable/user"/>
+
     </LinearLayout>
 
 </RelativeLayout>

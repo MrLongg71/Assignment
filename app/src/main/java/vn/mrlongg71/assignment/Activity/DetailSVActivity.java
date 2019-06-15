@@ -27,6 +27,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -397,7 +398,6 @@ public class DetailSVActivity extends AppCompatActivity {
 
         listSVDetail = findViewById(R.id.list_DetailSV);
         toolbar = findViewById(R.id.toolbar_Detail);
-
         //nhận dữ liệu từ intent màn hình SeétudentsActivity
 
         Intent intent = getIntent();

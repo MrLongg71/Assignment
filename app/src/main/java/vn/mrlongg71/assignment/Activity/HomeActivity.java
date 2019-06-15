@@ -1,14 +1,25 @@
 package vn.mrlongg71.assignment.Activity;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.CalendarContract;
+import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -149,6 +160,8 @@ public class HomeActivity extends AppCompatActivity
 
     }
 
+
+
     private void anhxa() {
         toolbar = findViewById(R.id.toolbar);
         drawer  = findViewById(R.id.drawer_layout);
@@ -248,4 +261,14 @@ public class HomeActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.choose_color, menu);
+
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
 }

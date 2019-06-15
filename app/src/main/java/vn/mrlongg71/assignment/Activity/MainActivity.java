@@ -48,10 +48,10 @@ public class MainActivity extends AppCompatActivity {
         //database.QueryData("INSERT INTO Students VALUES(null,'A','01' , 1, 1)");
 
         //duyệt get database
-        Cursor dataUser = database.GetData("SELECT * FROM Students");
-        while (dataUser.moveToNext()){
-            String user = dataUser.getString(1);
-            }
+//        Cursor dataUser = database.GetData("SELECT * FROM Students");
+//        while (dataUser.moveToNext()){
+//            String user = dataUser.getString(1);
+//            }
 
 
     }

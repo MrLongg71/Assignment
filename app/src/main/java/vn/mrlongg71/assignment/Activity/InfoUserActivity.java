@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -30,6 +31,7 @@ public class InfoUserActivity extends AppCompatActivity {
     ListView listViewInfo;
     ArrayList<User> userArrayList;
     UserAdapter userArrayAdapter;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +41,7 @@ public class InfoUserActivity extends AppCompatActivity {
         btnDeleteUser();
         //select data
         GetDataUser();
+        Toolbar();
     }
 
     private void btnDeleteUser() {
@@ -147,13 +150,27 @@ public class InfoUserActivity extends AppCompatActivity {
 
     }
 
+    private void Toolbar(){
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.back);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+
+    }
     private void anhxa() {
         btnDeleteUser = findViewById(R.id.btnDeleteUser);
         btnEditUser = findViewById(R.id.btnEditUser);
+        toolbar = findViewById(R.id.toolbar_InfoUser);
         //list view
         listViewInfo = findViewById(R.id.listInfoUser);
         userArrayList = new ArrayList<>();
         userArrayAdapter = new UserAdapter(this, R.layout.custom_listview_userinfo, userArrayList);
         listViewInfo.setAdapter(userArrayAdapter);
     }
+
 }

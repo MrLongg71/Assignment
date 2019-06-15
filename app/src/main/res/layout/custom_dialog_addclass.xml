@@ -85,7 +85,7 @@
         android:orientation="horizontal">
         <Button
             android:id="@+id/btnaddclass_dialog"
-            android:drawableLeft="@drawable/add"
+
             android:layout_margin="5dp"
             android:layout_weight="1.5"
             android:textColor="#FFFFFF"
@@ -103,8 +103,6 @@
             android:layout_margin="5dp"
             android:layout_weight="1.5"
             android:padding="7dp"
-
-            android:drawableLeft="@drawable/delete"
             android:text="Xóa Trắng "
             android:textColor="#FFFFFF" />
     </LinearLayout>

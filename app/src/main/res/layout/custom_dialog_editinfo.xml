@@ -52,9 +52,10 @@
             android:id="@+id/btnUpdate"
             android:layout_margin="5dp"
             android:padding="5dp"
-            android:background="@color/group_orgin"
+            android:background="@drawable/custom_button"
             android:layout_weight="1"
             android:text="Cập nhật"
+            android:textColor="#FFFFFF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <Button
@@ -62,8 +63,9 @@
             android:layout_margin="5dp"
             android:padding="5dp"
             android:layout_weight="1"
-            android:background="@color/group_orgin"
+            android:background="@drawable/custom_button"
             android:text="Hủy"
+            android:textColor="#FFFFFF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>

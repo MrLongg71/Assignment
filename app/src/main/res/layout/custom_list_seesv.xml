@@ -11,11 +11,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:src="@drawable/user"
+
+        <vn.mrlongg71.assignment.View.ImageHelper
             android:id="@+id/imgAnhSV"
             android:layout_width="100dp"
-            android:layout_height="100dp" />
+            android:layout_height="100dp"
+            android:src="@drawable/user"/>
+
+
+
+        <!--<ImageView-->
+            <!--android:src="@drawable/user"-->
+           <!---->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="100dp" />-->
         <LinearLayout
             android:orientation="vertical"
             android:layout_margin="5dp"

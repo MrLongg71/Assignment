@@ -75,7 +75,7 @@ public class SeeClassListActivity extends AppCompatActivity {
                 imgChooseDelete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        DialogDeleteClass(addClass.getId(), addClass.getMalop());
+                        DialogDeleteClass(addClass.getId(), addClass.getTenlop());
                         dialog.dismiss();
                     }
                 });
@@ -150,6 +150,7 @@ public class SeeClassListActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 addClassArrayList.clear();
                 MainActivity.database.QueryData("DELETE FROM Class WHERE id = '"+id+"'");
+                MainActivity.database.QueryData("UPDATE  Students SET idclass = '0' , tenlop = 'Chưa chọn lớp!' WHERE idclass = '"+id+"'");
                 Toast.makeText(getApplicationContext(), "Đã xóa lớp "+ tenlop + " thành công!", Toast.LENGTH_SHORT).show();
                 GetDataClass();
             }
@@ -223,7 +224,6 @@ public class SeeClassListActivity extends AppCompatActivity {
 
 
                     classAdapter.search(s);
-                   // Log.d("AAA", addClassArrayList.size()+ "");
                     classAdapter.notifyDataSetChanged();
 
                 return false;

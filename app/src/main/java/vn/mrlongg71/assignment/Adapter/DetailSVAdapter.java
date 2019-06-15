@@ -19,6 +19,7 @@ public class DetailSVAdapter extends BaseAdapter {
     Context context;
     int layout;
     List<Students> detailSvList;
+    public static Students students;
 
     public DetailSVAdapter(Context context, int layout, List<Students> detailSvList) {
         this.context = context;
@@ -59,7 +60,8 @@ public class DetailSVAdapter extends BaseAdapter {
         imgAnhSV = convertView.findViewById(R.id.imgAnhSVdetail);
 
 
-        Students students = detailSvList.get(position);
+
+        students = detailSvList.get(position);
         txtTenSvDetail.setText( students.getTenSV());
         txtNgaySinhSVDetail.setText(  students.getDate());
         txtEmailDetailSV.setText( students.getEmail());
@@ -67,14 +69,10 @@ public class DetailSVAdapter extends BaseAdapter {
         txtSDTDetailSV.setText( students.getSdt());
         txtPlaceDetailSV.setText( students.getPlace());
 
-        //chuyển byte -. bitmap
+        //chuyển byte -> bitmap
         byte[] imgSV = students.getImages();
         Bitmap bitmap = BitmapFactory.decodeByteArray(imgSV , 0, imgSV.length);
         imgAnhSV.setImageBitmap(bitmap);
-
-
-
-
         return convertView;
     }
 }
