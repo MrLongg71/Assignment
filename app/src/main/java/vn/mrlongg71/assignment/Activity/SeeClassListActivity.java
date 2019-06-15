@@ -30,10 +30,12 @@ import vn.mrlongg71.assignment.Adapter.ClassAdapter;
 import vn.mrlongg71.assignment.Model.AddClass;
 import vn.mrlongg71.assignment.R;
 
+import static vn.mrlongg71.assignment.Activity.MainActivity.database;
+
 public class SeeClassListActivity extends AppCompatActivity {
 
     ListView listaddclass;
-    ArrayList<AddClass> addClassArrayList;
+    ArrayList<AddClass> addClassArrayList, arrayDataCopy;
     ClassAdapter classAdapter;
     ImageView  img_huy_updateClass;
     EditText edtMalopUdate, edtTenlopupdate;
@@ -121,7 +123,7 @@ public class SeeClassListActivity extends AppCompatActivity {
                 if(malopMoi.length() ==0 || tenlopMoi.length() == 0){
                     Toast.makeText(SeeClassListActivity.this, "Vui lòng điền đủ thông tin!", Toast.LENGTH_SHORT).show();
                 }else{
-                    MainActivity.database.QueryData("UPDATE Class SET malop = '"+malopMoi+"' , tenlop = '"+tenlopMoi+"' WHERE id = '"+id+"'");
+                    database.QueryData("UPDATE Class SET malop = '"+malopMoi+"' , tenlop = '"+tenlopMoi+"' WHERE id = '"+id+"'");
                     GetDataClass();
                     dialog.dismiss();
                     Toast.makeText(SeeClassListActivity.this, "Đã cập nhật lớp" + tenlopMoi , Toast.LENGTH_SHORT).show();
@@ -149,8 +151,8 @@ public class SeeClassListActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 addClassArrayList.clear();
-                MainActivity.database.QueryData("DELETE FROM Class WHERE id = '"+id+"'");
-                MainActivity.database.QueryData("UPDATE  Students SET idclass = '0' , tenlop = 'Chưa chọn lớp!' WHERE idclass = '"+id+"'");
+                database.QueryData("DELETE FROM Class WHERE id = '"+id+"'");
+                database.QueryData("UPDATE  Students SET idclass = '0' , tenlop = 'Chưa chọn lớp!' WHERE idclass = '"+id+"'");
                 Toast.makeText(getApplicationContext(), "Đã xóa lớp "+ tenlop + " thành công!", Toast.LENGTH_SHORT).show();
                 GetDataClass();
             }
@@ -166,7 +168,7 @@ public class SeeClassListActivity extends AppCompatActivity {
     }
 
     private void GetDataClass() {
-        Cursor dataClass = MainActivity.database.GetData("SELECT * FROM Class WHERE iduser = '"+ iduser +"'");
+        Cursor dataClass = database.GetData("SELECT * FROM Class WHERE iduser = '"+ iduser +"'");
 //        addClassArrayList.clear();
         while (dataClass.moveToNext()){
             int id = dataClass.getInt(0);
@@ -223,8 +225,24 @@ public class SeeClassListActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String s) {
 
 
-                    classAdapter.search(s);
-                    classAdapter.notifyDataSetChanged();
+                if (s.length() == 0){
+                    listaddclass.setAdapter(classAdapter);
+                }else {
+                    arrayDataCopy = new ArrayList<>();
+                    Cursor cursor = database.GetData("Select * from nguoidung where tennd like '%" + s + "%' or sdt like '%" + s + "%'");
+                    while (cursor.moveToNext()) {
+                        arrayDataCopy.add(new AddClass(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3)));
+                    }
+                    ClassAdapter adapter = new ClassAdapter(SeeClassListActivity.this, R.layout.activity_see_class_list, arrayDataCopy);
+                    listaddclass.setAdapter(adapter);
+
+                }
+
+
+
+
+//                    classAdapter.search(s);
+//                    classAdapter.notifyDataSetChanged();
 
                 return false;
             }
