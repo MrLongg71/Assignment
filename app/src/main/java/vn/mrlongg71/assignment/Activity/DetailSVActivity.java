@@ -33,6 +33,7 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.regex.Pattern;
 
 import vn.mrlongg71.assignment.Adapter.DetailSVAdapter;
 import vn.mrlongg71.assignment.Adapter.SVAdapter;
@@ -256,14 +257,20 @@ public class DetailSVActivity extends AppCompatActivity {
                 String diachinew = edtDiachiSVUpdate.getText().toString().trim();
 
                 if(tenSVnew.length() == 0 || ngaysinhSVnew.length() == 0 || sdtnew.length() == 0 || emailnew.length() == 0 || diachinew.length() == 0){
-                    Toast.makeText(DetailSVActivity.this, "Vui lòng điều đủ thông tin!", Toast.LENGTH_SHORT).show();
-                }else{
-                    MainActivity.database.QueryData("UPDATE Students SET id = '"+id+"' ,tensv = '"+tenSVnew+"',ngaysinh = '"+ngaysinhSVnew+"', idclass = '"+idclass+"', iduser = '"+iduser+"', tenlop = '"+tenlopnew+"',sdt = '"+sdtnew+"', email = '"+emailnew+"', place = '"+diachinew+"' WHERE id = '"+idsv+"'  AND iduser = '"+iduser+"'");
+                    Toast.makeText(DetailSVActivity.this, "Vui lòng điền đủ thông tin!", Toast.LENGTH_SHORT).show();
+                }else if(!checkemail(emailnew)) {
+                    Toast.makeText(DetailSVActivity.this, "Vui lòng nhập đúng định dạng email!", Toast.LENGTH_SHORT).show();
+                }else {
+
+
+                    MainActivity.database.QueryData("UPDATE Students SET id = '" + id + "' ,tensv = '" + tenSVnew + "',ngaysinh = '" + ngaysinhSVnew + "', idclass = '" + idclass + "', iduser = '" + iduser + "', tenlop = '" + tenlopnew + "',sdt = '" + sdtnew + "', email = '" + emailnew + "', place = '" + diachinew + "' WHERE id = '" + idsv + "'  AND iduser = '" + iduser + "'");
                     Toast.makeText(DetailSVActivity.this, "Đã cập nhật!", Toast.LENGTH_SHORT).show();
 
                     dialog.dismiss();
                     GetDataSV_Detail();
                     detailSVAdapter.notifyDataSetChanged();
+
+
                 }
 
 
@@ -392,6 +399,17 @@ public class DetailSVActivity extends AppCompatActivity {
             Arr_spiner.add(new AddClass(id, malop, tenlop, iduser));
         }
         spinerClassAdapter.notifyDataSetChanged();
+    }
+    //check email
+    private boolean checkemail(String email) {
+        Pattern Email = Pattern.compile("[a-zA-Z0-9+._%-+]{1,256}" +
+                "@" +
+                "[a-zA-Z0-9][a-zA-Z0-9-]{0,64}" +
+                "(" +
+                "." +
+                "[a-zA-Z0-9][a-zA-Z0-9-]{0,25}" +
+                ")+");
+        return Email.matcher(email).matches();
     }
 
     private void anhxa() {
